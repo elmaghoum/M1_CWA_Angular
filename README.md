@@ -73,7 +73,7 @@ Suivez les étapes ci-dessous pour installer et configurer l'application Angular
    - Téléchargez MongoDB Compass à partir du [site officiel de MongoDB Compass](https://www.mongodb.com/products/compass).
 2. **Lancer MongoDB Compass**
    - Suivez les instructions d'installation, puis lancez l'application et connectez-vous à votre base de données.
-   - Importer les fichiers de BD "BD.json" et BDD_1.json
+   - Importer les fichiers de BD "bdd.json" et bdd_1.json
 
 ### 4. Installation des Modules Complémentaires
 
