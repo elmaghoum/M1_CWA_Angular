@@ -74,6 +74,7 @@ Suivez les étapes ci-dessous pour installer et configurer l'application Angular
 2. **Lancer MongoDB Compass**
    - Suivez les instructions d'installation, puis lancez l'application et connectez-vous à votre base de données.
    - Importer les fichiers de BD "bdd.json" et bdd_1.json
+   (- Faire la connection BD <-> Angular, en fonction de votre BD de son nom, son port etc...)
 
 ### 4. Installation des Modules Complémentaires
 
