@@ -1,0 +1,52 @@
+<!-- Page de la gestion des Événements reservé-->
+
+<div class="container mt-4">
+  <!-- Titre de la page -->
+  <h2>Liste des événements</h2>
+
+  <!-- Section pour le tri des événements -->
+  <div>
+    <label for="critereTri">Trier par :</label>
+    <!-- Liste déroulante pour choisir le critère de tri -->
+    <select id="critereTri" [(ngModel)]="critereTri" (change)="triEvenements()">
+      <option value="nom">Nom</option>
+      <option value="prix">Prix</option>
+      <option value="priorite">Priorité</option>
+      <option value="date">Date</option>
+      <option value="terminer">Terminé</option>
+    </select>
+  </div>
+
+  <!-- Tableau affichant les détails des événements -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Priorité</th>
+        <th>Date</th>
+        <th>Terminé</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Boucle pour afficher chaque événement dans une ligne du tableau -->
+      <tr *ngFor="let evenement of evenements">
+        <!-- Colonne pour le nom de l'événement -->
+        <td>{{ evenement.nom }}</td>
+        <!-- Colonne pour le prix des billets -->
+        <td>{{ evenement.prixBillets }}</td>
+        <!-- Colonne pour la priorité de l'événement -->
+        <td>{{ evenement.priorite }}</td>
+        <!-- Colonne pour la date d'échéance de l'événement -->
+        <td>{{ evenement.dateEcheance }}</td>
+        <!-- Colonne pour indiquer si l'événement est terminé ou non -->
+        <td>{{ evenement.termine ? 'Oui' : 'Non' }}</td>
+        <!-- Colonne pour les actions, ici le bouton de suppression -->
+        <td>
+          <button class="btn btn-danger" (click)="supprimerEvenement(evenement)">Supprimer cette réservation</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

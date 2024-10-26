@@ -1,0 +1,75 @@
+/* Style du conteneur d'inscription */
+.registration-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f8f9fa; /* Couleur de fond légère */
+    border: 1px solid #ced4da; /* Bordure grise */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  /* Style du formulaire d'inscription */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style des groupes de formulaire */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Style des libellés de formulaire */
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  /* Style des champs de formulaire */
+  input,
+  select,
+  textarea {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Style des champs de formulaire lorsqu'ils sont en focus */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #3498db;
+  }
+  
+  /* Style du bouton de formulaire */
+  button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Style de la case à cocher */
+  .form-check-input {
+    margin-top: 5px;
+  }

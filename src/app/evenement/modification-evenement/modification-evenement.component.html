@@ -1,0 +1,69 @@
+<!-- modifier-evenement.component.html -->
+<div class="container mt-5">
+    <!-- Sélection de l'événement à modifier -->
+  <h2>Sélectionnez un événement à modifier :</h2>
+  <select class="form-control" [(ngModel)]="selectedEvenement" (change)="onSelectEvent()">
+    <option *ngFor="let evenement of evenements" [ngValue]="evenement">{{ evenement.nom }}</option>
+  </select>
+
+  <!-- Utilisation de ngIf pour afficher conditionnellement le lien -->
+   <a *ngIf="selectedEvenement" [routerLink]="['/modification', selectedEvenement._id]" class="rt route"></a>
+
+  <!-- Section pour modifier l'événement sélectionné -->
+  <div *ngIf="selectedEvenement" class="mt-4">
+      <h2>Modifier l'événement :</h2>
+      <form>
+        <div class="form-group">
+          <label for="nom">Nom :</label>
+          <input type="text" class="form-control" id="nom" [(ngModel)]="selectedEvenement.nom" name="nom" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dateEcheance">Date d'échéance :</label>
+          <input type="date" class="form-control" id="dateEcheance" [(ngModel)]="selectedEvenement.dateEcheance" name="dateEcheance" required>
+        </div>
+
+        <div class="form-group">
+          <label for="priorite">Priorité :</label>
+          <input type="text" class="form-control" id="priorite" [(ngModel)]="selectedEvenement.priorite" name="priorite" required>
+        </div>
+
+        <div class="form-group">
+          <label for="statut">Statut :</label>
+          <input type="text" class="form-control" id="statut" [(ngModel)]="selectedEvenement.statut" name="statut" required>
+        </div>
+
+        <div class="form-group">
+          <label for="commentaire">Commentaire :</label>
+          <textarea class="form-control" id="commentaire" [(ngModel)]="selectedEvenement.commentaire" name="commentaire" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="prixBillets">Prix des billets :</label>
+          <input type="number" class="form-control" id="prixBillets" [(ngModel)]="selectedEvenement.prixBillets" name="prixBillets" required>
+        </div>
+
+        <div class="form-group">
+          <label for="genreEvenement">Genre de l'événement :</label>
+          <input type="text" class="form-control" id="genreEvenement" [(ngModel)]="selectedEvenement.genreEvenement" name="genreEvenement" required>
+        </div>
+
+        <div class="form-group">
+          <label for="artistes">Artistes :</label>
+          <input type="text" class="form-control" id="artistes" [(ngModel)]="selectedEvenement.artistes" name="artistes" required>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Image :</label>
+          <input type="text" class="form-control" id="image" [(ngModel)]="selectedEvenement.image" name="image" required>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="onSave()">Enregistrer les modifications</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <p></p>
+    <p></p>
+  </div>

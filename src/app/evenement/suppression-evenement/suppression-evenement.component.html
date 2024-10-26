@@ -1,0 +1,26 @@
+<!-- suppression-evenement.component.html -->
+<div class="container mt-5">
+    <h2>Sélectionnez un événement à supprimer :</h2>
+  <select class="form-control" [(ngModel)]="selectedEvenement" (change)="onSelectEvent()">
+    <option *ngFor="let evenement of evenements" [ngValue]="evenement">{{ evenement.nom }}</option>
+  </select>
+
+    <!-- Utilisation de ngIf pour afficher conditionnellement le lien -->
+    <a *ngIf="selectedEvenement" [routerLink]="['/suppression', selectedEvenement._id]" class="rt route"></a>
+
+  <!-- Section pour supprimer l'événement sélectionné -->
+  <div *ngIf="selectedEvenement" class="form-group">
+        <p id="attention">
+            ATTENTION VOUS ALLEZ SUPPRIMER UN EVENEMENT
+        </p>
+
+        <label for="nom">Etês-vous sûr de bien vouloir supprimer l'événement:</label>
+        <input type="text" class="form-control" id="nom" [(ngModel)]="selectedEvenement.nom" name="nom" disabled>
+        <p></p>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-danger btn-lg" (click)="onRemove()">Supprimer l'événement</button>
+        </div>
+
+    </div>
+</div>

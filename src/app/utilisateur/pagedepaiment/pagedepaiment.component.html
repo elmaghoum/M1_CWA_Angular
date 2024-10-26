@@ -1,0 +1,36 @@
+<!-- page-de-paiement.component.html -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3" style="background-color: #000f1f;">
+  <div class="container2">
+    <img src="./assets/logo.png" width="100" height="40" class="d-inline-block align-top mr-2" alt="Logo">
+  </div>
+  <h2>Page de Paiement</h2>
+</nav>
+
+<div class="container">
+  <!-- Récapitulatif de prix -->
+  <div class="recap">
+    <h3>Récap de la commande</h3>
+    <p>Evenement : {{ titre }} </p>
+    <p>Montant : {{ amount | currency:'EUR' }}</p>
+  </div>
+
+  <!-- Formulaire de paiement  -->
+  <form (submit)="processPayment()" #paymentForm="ngForm">
+    <!-- Détails de la carte de crédit -->
+    <label for="cardNumber">Numéro de carte :</label>
+    <input type="text" id="cardNumber" name="cardNumber" [(ngModel)]="cardNumber" required maxlength="16">
+  
+    <label for="expiryDate">Date d'expiration :</label>
+    <input type="date" id="expiryDate" name="expiryDate" [(ngModel)]="expiryDate" required>
+  
+    <label for="cvv">CVV :</label>
+    <input type="text" id="cvv" name="cvv" [(ngModel)]="cvv" required maxlength="3">
+  
+    <label for="lastName">Nom du payeur :</label>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+  
+    <button type="submit" [disabled]="!paymentForm.valid">Payer</button>
+  </form>
+  
+</div>
+

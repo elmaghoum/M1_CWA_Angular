@@ -1,0 +1,256 @@
+
+/* Barre de navigation */
+nav.navbar {
+  margin-bottom: 20px;
+  margin-right: -10px;
+}
+
+.event-image {  /* css du carousel     */
+  height: 620px; /* Remplacez la valeur par la hauteur souhaitée */
+  object-fit: cover; /* Optionnel - pour conserver le ratio d'aspect de l'image */
+  transition: transform 0.3s ease; /* Ajoute une transition de 0.3 seconde avec une fonction de facilité (ease) */
+  border-radius: 8px; /* Remplacez la valeur par le rayon de la bordure souhaité */
+}
+
+.event-list-image {
+  height: 300px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 430px; /* Ajustez la largeur selon vos préférences */
+  margin: 10px;
+  overflow: hidden;
+  background-color: #202020;
+  box-shadow: 4px 3px 8px 0px rgb(200 152 44 / 22%);
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.event-list-image:hover {
+  box-shadow: 4px 3px 11px 6px rgba(0, 0, 0, 0.46);
+  transform: translateY(-3px);
+}
+
+
+ h1 {
+    color: #ffffff;
+    font-size: 2.85em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Style du titre "Liste des Événements à venir" */
+/* Style du titre principal */
+h1.text-center {
+  color: #190101; /* Couleur principale */
+  font-size: 2.5em; /* Taille de police */
+  font-weight: bold; /* Gras */
+  text-transform: uppercase; /* Majuscules */
+  letter-spacing: 3px; /* Espacement entre les lettres */
+  margin-bottom: 30px; /* Marge en bas */
+  position: relative; /* Position relative pour le pseudo-élément */
+}
+
+/* Pseudo-élément ::before pour ajouter une ligne décorative */
+h1.text-center::before {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Ajustez la position de la ligne par rapport au titre */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px; /* Largeur de la ligne */
+  height: 3px; /* Épaisseur de la ligne */
+  background-color: rgb(28, 21, 114); /* Couleur de la ligne */
+}
+
+/* Effet de survol pour le titre */
+h1.text-center:hover {
+  color: rgb(28, 21, 114); /* Couleur au survol */
+}
+
+/* Animation de la ligne décorative au survol */
+h1.text-center:hover::before {
+  width: 1000px; /* Largeur de la ligne au survol */
+  transition: width 0.3s ease; /* Transition fluide */
+}
+
+  /* Conteneur principal */
+  .accueil-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Ajout d'une couleur de fond */
+    border-radius: 8px; /* Bords arrondis pour un aspect plus moderne */
+  }
+
+  /* Liste des événements */
+  .evenements-list {
+    margin-top: 20px;
+  }
+
+  /* Élément d'événement individuel */
+  .evenement-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f8f8; /* Couleur de fond légère pour différencier les événements */
+    border-radius: 4px; /* Bords arrondis pour un aspect plus moderne */
+  }
+
+  /* Conteneur des boutons */
+  .buttons-container {
+    margin-top: 20px;
+    text-align: center; /* Centrer les boutons horizontalement */
+  }
+
+  /* Bouton de style professionnel */
+  .btn {
+    border: none;
+    outline: none;
+    background: rgb(28, 21, 114);
+    padding: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    transition-duration: 0.3s;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+      color: rgb(28, 21, 114);
+      background-color: #fff;
+      border: 1px solid rgb(28, 21, 114); }
+
+  /* Message s'il n'y a aucun événement */
+  .no-events-message {
+    margin-top: 20px;
+    color: #777;
+    text-align: center; /* Centrer le message horizontalement */
+  }
+
+
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan semi-transparent pour le texte */
+    padding: 10px;
+    color: #fff; /* Couleur du texte */
+  }
+
+
+
+  /* Ajoutez ce style à votre fichier CSS ou balise style */
+.custom-dropdown {
+  max-width: 200px; /* Ajustez la largeur selon vos besoins */
+  margin-bottom: 15px;
+}
+
+/* Style pour les options de la liste déroulante */
+.custom-dropdown option {
+  background-color: #f8f9fa;
+  color: #000000;
+}
+
+/* Style pour la flèche de la liste déroulante */
+.custom-dropdown::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #000000;
+  pointer-events: none;
+}
+
+/* Barre de recherche améliorée */
+form.form-inline.my-2.my-lg-0 {
+  position: relative;
+}
+
+div.input-group {
+  width: 100%;
+}
+
+input.form-control.mr-sm-2 {
+  border-radius: 5px 0 0 5px;
+}
+
+button.btn.btn-outline-success.my-2.my-sm-0 {
+  border-radius: 0 5px 5px 0;
+}
+
+/* Effet de survol pour le bouton de recherche */
+button.btn.btn-outline-success.my-2.my-sm-0:hover {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Style pour la barre de recherche au focus */
+input.form-control.mr-sm-2:focus {
+  box-shadow: none;
+  border-color: #28a745;
+}
+
+.card-body .btn {
+  margin-right: 20px; /* Tu peux ajuster la valeur selon la quantité d'espace souhaitée */
+  margin-left: 20px;
+  opacity: 0;
+}
+
+.card:hover .btn {
+  opacity: 1; /* Affiché au survol */
+}
+
+/* Style pour la section connectée */
+div.logged-in-section {
+  display: flex;
+  align-items: center;
+}
+
+/* Style pour la liste ul */
+ul {
+  list-style-type: none; /* Supprime les puces de la liste */
+  display: flex;
+  align-items: center; /* Centre les éléments horizontalement */
+  margin: 0;
+  padding: 0;
+}
+
+/* Style pour chaque élément li dans la liste */
+ul li {
+  margin-right: 20px; /* Espacement entre les éléments li */
+}
+
+p.text-white {
+  color: #fff;
+  margin: 0; /* Supprime la marge par défaut du paragraphe */
+}
+
+/* Style pour le lien de réservation */
+a.nav-link.custom-width {
+  color: #fff;
+  text-decoration: none; /* Supprime la soulignement du lien */
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+a.nav-link.custom-width:hover {
+  background-color: #343a40; /* Couleur de fond au survol */
+}
+
+/* Style pour le bouton de déconnexion */
+button.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-danger:hover {
+  background-color: #c82333;
+}

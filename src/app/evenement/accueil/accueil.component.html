@@ -1,0 +1,350 @@
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<!-- Popper.js, nécessaire pour les fonctionnalités avancées de Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3" style="background-color: #000f1f;">
+  <div class="container">
+    <img src="../../../assets/logo.png" width="100" height="40" class="d-inline-block align-top mr-2" alt="Logo">
+
+    <!-- Navigation Menu -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link custom-width" routerLink="/creation" *ngIf="isAdmin()">Ajouter un Événement</a>
+        </li>
+        <li class="nav-item" *ngIf="evenements && evenements.length > 0 && isAdmin()">
+          <a class="nav-link custom-width" [routerLink]="['/modification', evenements[0].id]">Modifier un Événement</a>
+        </li>
+        <li class="nav-item" *ngIf="evenements && evenements.length > 0 && isAdmin()">
+          <a class="nav-link custom-width" [routerLink]="['/suppression', evenements[0].id]">Supprimer un Événement</a>
+        </li>
+
+
+      <!-- Barre de recherche -->
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0" [class.ml-3]="!isAdmin()">
+            <div class="input-group">
+              <input class="form-control mr-sm-2 custom-search" type="search" placeholder="Search 50+ events" aria-label="Search" [(ngModel)]="termeRecherche" name="termeRecherche">
+              <div class="input-group-append">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="onSave()">Rechercher</button>
+              </div>
+            </div>
+          </form>
+        </li>
+
+        <!-- Partie centrale de la barre de navigation (Boutons Inscription et Connexion) -->
+        <li class="nav-item ml-2" *ngIf="!isLoggedIn">
+          <a routerLink="connexion" class="text-light">
+            <i class="bi bi-person" style="font-size: 2.5rem;"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Afficher le nom d'utilisateur et le bouton de déconnexion si connecté -->
+    <div *ngIf="isLoggedIn">
+      <ul>
+        <li>
+          <p class="text-white">Bienvenue {{ userName }}</p>
+        </li>
+        <li class="nav-item ml-2" *ngIf="isUser()">
+          <a class="nav-link custom-width" [routerLink]="['/réservation',userId]">Mes réservations</a>
+        </li>
+        <li>
+          <button (click)="deconnexion()" class="btn btn-danger">Déconnexion</button>
+        </li>
+      </ul>
+    </div>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <label for="tri">Trier par :</label>
+      <select class="form-control custom-dropdown" id="tri" [(ngModel)]="critereTri" (change)="onTriChange()">
+        <option value="nom">Nom</option>
+        <option value="date">Date</option>
+        <option value="prix">Prix</option>
+      </select>
+    </div>
+
+    <div class="col-md-9">
+      <h1 class="text-center mb-4">Liste des Événements à venir</h1>
+    </div>
+  </div>
+
+
+
+<!-- Conteneur principal avec classes Bootstrap  carousel -->
+
+<ngb-carousel *ngIf="evenements && evenements.length > 0" class="mb-5">
+  <ng-template ngbSlide *ngFor="let evenement of evenements">
+    <img class="d-block w-100 event-image img-fluid" [src]="'assets/images/' +evenement.image" alt="{{ evenement.nom }}">
+    <div class="carousel-caption">
+      <h5>{{ evenement.nom }}</h5>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+  <!-- Liste des événements avec classes Bootstrap -->
+  <div *ngIf="evenements && evenements.length > 0" class="row">
+    <div *ngFor="let evenement of evenements" class="col-md-6">
+      <div class="card mb-4">
+        <a [routerLink]="['/details', evenement._id]">
+          <img class="card-img-top event-list-image" [src]="'assets/images/' + evenement.image" alt="{{ evenement.nom }}">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{ evenement.nom }}</h5>
+          <a *ngIf="isLoggedIn && !isAdmin()"  [routerLink]="['/paiement', evenement._id]" class="btn btn-primary mr-2">Réserver</a>
+          <a *ngIf="!isLoggedIn && !isAdmin()" [routerLink]="['/connexion']" class="btn btn-primary">Réserver</a>
+          <a [routerLink]="['/details', evenement._id]" class="btn btn-primary">Détails</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Boutons de navigation Bootstrap -->
+  <div class="text-center mt-4">
+    <button *ngIf="isLoggedIn && isAdmin()" routerLink="/creation" class="btn btn-success">Ajouter un Événement</button>
+    <button *ngIf="evenements && evenements.length > 0 && isLoggedIn && isAdmin()" [routerLink]="['/modification', evenements[0].id]" class="btn btn-warning">Modifier un Événement</button>
+    <button *ngIf="evenements && evenements.length > 0 && isLoggedIn && isAdmin()" [routerLink]="['/suppression', evenements[0].id]" class="btn btn-danger">Supprimer un Événement</button>
+  </div>
+
+  <!-- Message si aucun événement n'est disponible -->
+  <div *ngIf="evenements.length === 0" class="text-center mt-4">
+    Aucun événement à venir pour le moment.
+  </div>
+</div>
+
+<nav aria-label="Page navigation " >
+  <ul class="pagination justify-content-center mt-4">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- Section Foire Aux Questions (FAQ) -->
+<section id="questions" class="p-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Questions Fréquemment Posées</h2>
+    <div class="accordion accordion-flush" id="question">
+      <!-- Question 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#question-one"
+          >
+            Où êtes-vous situés exactement?
+          </button>
+        </h2>
+        <div
+          id="question-one"
+          class="accordion-collapse collapse"
+          data-bs-parent="#question"
+        >
+          <div class="accordion-body">
+            Notre siège social est situé en France. Cependant, nos événements peuvent se dérouler dans divers endroits. Veuillez consulter la page de l'événement spécifique pour obtenir des informations détaillées sur la localisation.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#question-two"
+          >
+            Combien coûte l'inscription à un événement?
+          </button>
+        </h2>
+        <div
+          id="question-two"
+          class="accordion-collapse collapse"
+          data-bs-parent="#question"
+        >
+          <div class="accordion-body">
+            Les coûts d'inscription varient en fonction de l'événement. Consultez la page de l'événement spécifique pour connaître les détails sur les frais d'inscription. Nous proposons également des tarifs réduits pour les étudiants et les membres affiliés.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#question-three"
+          >
+            Que dois-je savoir avant de participer à un événement?
+          </button>
+        </h2>
+        <div
+          id="question-three"
+          class="accordion-collapse collapse"
+          data-bs-parent="#question"
+        >
+          <div class="accordion-body">
+            Avant de participer à un événement, assurez-vous de lire attentivement toutes les informations disponibles sur la page de l'événement. Cela inclut les détails logistiques, les horaires, et toute exigence particulière. N'hésitez pas à nous contacter si vous avez des questions supplémentaires.
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#question-four"
+          >
+            Comment puis-je m'inscrire à un événement?
+          </button>
+        </h2>
+        <div
+          id="question-four"
+          class="accordion-collapse collapse"
+          data-bs-parent="#question"
+        >
+          <div class="accordion-body">
+            L'inscription à nos événements se fait en ligne. Visitez la page de l'événement spécifique, et suivez les instructions d'inscription. Si vous rencontrez des difficultés, notre équipe de support est disponible pour vous aider. Vous pouvez nous contacter à [adresse e-mail ou numéro de téléphone].
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#question-five"
+          >
+            Pouvez-vous m'aider à trouver un emploi grâce à vos événements?
+          </button>
+        </h2>
+        <div
+          id="question-five"
+          class="accordion-collapse collapse"
+          data-bs-parent="#question"
+        >
+          <div class="accordion-body">
+            Nos événements fournissent une excellente occasion de réseautage, mais nous ne garantissons pas un emploi direct. Cependant, de nombreuses entreprises participent à nos événements, offrant ainsi des opportunités de rencontres professionnelles. Assurez-vous d'apporter votre CV et de vous engager activement lors des sessions de réseautage pour maximiser vos chances.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Nous -->
+<section id="instructors" class="p-5 bg-primary">
+  <div class="container">
+    <h2 class="text-center text-white">Notre équipe</h2>
+    <p class="lead text-center text-white mb-5">
+      Des étudiants en M1 BDIA
+    </p>
+    <div class="row g-4 justify-content-center align-items-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light text-center">
+          <div class="card-body">
+            <img
+              src="https://www.kindpng.com/picc/m/52-526798_anonymous-person-transparent-hd-png-download.png"
+              class="rounded-circle mb-3"
+              alt=""
+              style="width: 150px; height: 150px;"
+            />
+            <h3 class="card-title mb-3">Ilyas TAHIR</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light text-center">
+          <div class="card-body">
+            <img
+              src="https://www.kindpng.com/picc/m/52-526798_anonymous-person-transparent-hd-png-download.png"
+              class="rounded-circle mb-3"
+              alt=""
+              style="width: 150px; height: 150px;"
+            />
+            <h3 class="card-title mb-3">Idir AMZAL</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light text-center">
+          <div class="card-body">
+            <img
+              src="https://www.kindpng.com/picc/m/52-526798_anonymous-person-transparent-hd-png-download.png"
+              class="rounded-circle mb-3"
+              alt=""
+              style="width: 150px; height: 150px;"
+            />
+            <h3 class="card-title mb-3">EL MAGHOUM Fayçal</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="text-center mt-4 md-5">
+  <p>Retrouvez le code source de notre projet sur GitHub en cliquant sur l'icône ci-dessous :</p>
+  <a href="https://github.com/makavelli666/cwa_project" target="_blank">
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.8SVgggxQcO5L6Dw_61ac4QHaEK%26pid%3DApi&f=1&ipt=7000c82407466119ef5070ea5aaf133c6e1237233effcd97fc407a64a8ed0ddd&ipo=images" alt="GitHub Logo" width="75" height="40">
+  </a>
+</div>
+
+
+
+     <!-- Newsletter -->
+     <section class="bg-primary text-light p-5 ">
+      <div class="container">
+        <div class="d-md-flex justify-content-between align-items-center">
+          <h3 class="mb-3 mb-md-0">Sign Up For Our Newsletter</h3>
+
+          <div class="input-group news-input">
+            <input type="text" class="form-control" placeholder="Enter Email" />
+            <button class="btn btn-dark btn-lg" type="button">Submit</button>
+          </div>
+        </div>
+      </div>
+    </section>

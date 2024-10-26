@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Section pour afficher l'image de l'événement -->
+      <img class="img-fluid" [src]="'assets/images/' + evenement.image" alt="{{ evenement.nom }}">
+    </div>
+    <div class="col-md-6">
+      <!-- Section pour afficher les détails de l'événement -->
+      <h2>{{ evenement.nom }}</h2> <!-- Nom de l'événement -->
+      <p>Date d'échéance : {{ evenement.dateEcheance }}</p> <!-- Date d'échéance de l'événement -->
+      <p>Priorité : {{ evenement.priorite }}</p> <!-- Priorité de l'événement -->
+      <p>Statut : {{ evenement.statut }}</p> <!-- Statut de l'événement -->
+      <p>Commentaire : {{ evenement.commentaire }}</p> <!-- Commentaire de l'événement -->
+      <p>Prix des billets : {{ evenement.prixBillets }} €</p> <!-- Prix des billets de l'événement -->
+      <p>Genre de l'événement : {{ evenement.genreEvenement }}</p> <!-- Genre de l'événement -->
+      <p>Artistes : {{ evenement.artistes.join(', ') }}</p> <!-- Liste des artistes de l'événement -->
+    </div>
+  </div>
+</div>
+
+<div>
+<p></p>
+<p></p>
+</div>

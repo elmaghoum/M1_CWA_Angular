@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="text-center mt-4 mb-3">Connexion</h1>
+
+  <!-- Link to "J'ai déjà un compte" -->
+  <p class="text-center">Vous n'avez pas de compte ? <a routerLink="/inscription">Inscrivez-vous ici</a>.</p>
+
+  <form #loginForm="ngForm" (ngSubmit)="connexion(loginForm)" class="col-lg-6 offset-lg-3 login-container">
+
+    <div class="form-group">
+      <label for="email">Adresse e-mail</label>
+      <input type="email" id="email" name="email" ngModel required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" ngModel required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" id="remember" name="remember" ngModel class="custom-control-input">
+        <label class="custom-control-label" for="remember">
+          <span style="margin-right: 5px;"></span> Se souvenir de moi </label>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block mt-3">Se connecter</button>
+  </form>
+</div>

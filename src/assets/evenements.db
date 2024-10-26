@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS evenements (
+    id INTEGER PRIMARY KEY,
+    nom TEXT,
+    dateEcheance TEXT,
+    priorite TEXT,
+    statut TEXT,
+    commentaire TEXT,
+    prixBillets REAL,
+    genreEvenement TEXT,
+    image TEXT
+);
+
+CREATE TABLE IF NOT EXISTS artistes(
+    id INTEGER PRIMARY KEY,
+    evenementId INTEGER,
+    artiste TEXT,
+    FOREIGN KEY(evenementId) REFERENCES evenements(id)
+);
+
+INSERT INTO evenementsVALUES (1,'Concert: Night of Harmony', '2023-12-01', 'élevée', 'en cours', 'Plongez dans l\'univers mystérieux des œuvres inédites de Shakespeare', 25, 'Théâtre', 'Shakespeare.png');

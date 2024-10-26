@@ -1,0 +1,73 @@
+<!-- Page de création d'un evenement -->
+<div class="container">
+  <h1 class="text-center mt-4 mb-3">Création d'un Nouvel Événement</h1> <!-- Titre de la page -->
+  <form (ngSubmit)="CreerEvenement()" #evenementForm="ngForm" enctype="multipart/form-data" class="col-lg-6 offset-lg-2 creation-container">
+    <!-- Formulaire de création d'un nouvel événement -->
+
+    <div class="form-group">
+      <label for="nom">Nom de l'événement</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="nouvelEvenement.nom" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="genreEvenement">Genre de l'événement</label>
+      <select id="genreEvenement" name="genreEvenement" [(ngModel)]="nouvelEvenement.genreEvenement" required class="form-control">
+        <!-- Menu déroulant pour choisir le genre de l'événement -->
+        <option value="Concert">Concert</option>
+        <option value="Théâtre">Théâtre</option>
+        <option value="Conférence">Conférence</option>
+        <option value="Exposition">Exposition</option>
+        <option value="Festival">Festival</option>
+        <option value="Cinéma">Cinéma</option>
+        <option value="Sport">Événement Sportif</option>
+        <option value="Comédie musicale">Comédie </option>
+        <option value="Galerie d'art">Galerie d'art</option>
+        <option value="Spectacle comique">Spectacle comique</option>
+        <option value="Danse">Danse</option>
+        <option value="Opéra">Opéra</option>
+        <option value="Lecture">Lecture</option>
+        <option value="Défilé de mode">Défilé de mode</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dateEcheance">Date du spectacle</label>
+      <input type="date" id="dateEcheance" name="dateEcheance" [(ngModel)]="nouvelEvenement.dateEcheance" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="prixBillets">Prix des billets</label>
+      <div class="input-group">
+        <input type="number" id="prixBillets" name="prixBillets" [(ngModel)]="nouvelEvenement.prixBillets" required class="form-control">
+        <div class="input-group-prepend">
+          <span class="input-group-text">€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="priorite">Priorité</label>
+      <select id="priorite" name="priorite" [(ngModel)]="nouvelEvenement.priorite" required class="form-control">
+        <!-- Menu déroulant pour choisir la priorité de l'événement -->
+        <option value="élevée">Élevée</option>
+        <option value="moyenne">Moyenne</option>
+        <option value="faible">Faible</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Affiche de l'événement</label>
+      <input type="file" id="image" name="image" accept="image/*" required class="form-control-file" (change)="onFileSelected($event)">
+      <!-- Champ de téléchargement pour l'affiche de l'événement -->
+    </div>
+
+    <div class="form-group">
+      <label for="commentaire">Commentaire</label>
+      <textarea id="commentaire" name="commentaire" [(ngModel)]="nouvelEvenement.commentaire" class="form-control"></textarea>
+    </div>
+
+    <button type="button" [disabled]="!evenementForm.valid" (click)="CreerEvenement()" class="btn btn-primary btn-block mt-3">Créer l'Événement</button>
+    <!-- Bouton de création de l'événement, désactivé si le formulaire n'est pas valide -->
+   </form>
+
+</div>
