@@ -1,0 +1,42 @@
+[
+  {
+    "nom": "Doe",
+    "prenom": "John",
+    "email": "john.doe@example.com",
+    "motDePasse": "motdepasse123",
+    "role": "user",
+    "dateInscription": "2023-01-01T12:00:00Z"
+  },
+  {
+    "nom": "Smith",
+    "prenom": "Alice",
+    "email": "alice.smith@example.com",
+    "motDePasse": "password456",
+    "role": "user",
+    "dateInscription": "2023-02-15T14:30:00Z"
+  },
+  {
+    "nom": "Admin",
+    "prenom": "Admin",
+    "email": "admin@example.com",
+    "motDePasse": "admin123",
+    "role": "admin",
+    "dateInscription": "2023-03-20T09:45:00Z"
+  },
+  {
+    "nom": "Brown",
+    "prenom": "Eva",
+    "email": "eva.brown@example.com",
+    "motDePasse": "eva567",
+    "role": "user",
+    "dateInscription": "2023-04-10T18:20:00Z"
+  },
+  {
+    "nom": "White",
+    "prenom": "David",
+    "email": "david.white@example.com",
+    "motDePasse": "davidpass",
+    "role": "user",
+    "dateInscription": "2023-05-05T11:10:00Z"
+  }
+]
